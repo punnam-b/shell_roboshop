@@ -5,7 +5,7 @@ AMI_ID="ami-0220d79f3f480ecf5"
 
 
 
-for intance in $@
+for instance in $@
 do
         INSTANCE_ID=$( aws ec2 run-instances \
         --image-id $AMI_ID \
