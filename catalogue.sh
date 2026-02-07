@@ -7,7 +7,9 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-
+MONGODB_HOST="mongodb.dhruvanakshatra.in"
+SCRIPT_DIR=$PWD
+echo " working directory '$SCRIPT_DIR'"
 
 if [ $USERID -ne 0 ]; then
     echo  -e "$R .pls run with root user $N"  | tee -a $LOGS_FILE
@@ -65,11 +67,20 @@ npm install &>>LOGFILENAME
 VALIDATE $? "npm install"
 
 
-cp catalogue.services /etc/systemd/system/catalogue.service &>>LOGFILENAME
+cp $SCRIPT_DIR/catalogue.services /etc/systemd/system/catalogue.service &>>LOGFILENAME
 VALIDATE $? "copying catalogue.service"
 
 systemctl daemon-reload &>>LOGFILENAME
 systemctl enable catalogue  &>>LOGFILENAME
 systemctl start catalogue &>>LOGFILENAME
 VALIDATE $? "Enable & START Catalogue"
+
+cp mongo.repo /etc/yum.repos.d/mongo.repo
+dnf install mongodb-mongosh -y &>>LOGFILENAME
+VALIDATE $? "Install Mongodb client"
+
+
+
+#mongosh --host $MONGODB_HOST --quiet --eval 'db.getMongo().getDBNames().indexOf("catalogue")' &>>LOGFILENAME
+
 
