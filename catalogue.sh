@@ -75,7 +75,8 @@ systemctl enable catalogue  &>>LOGFILENAME
 systemctl start catalogue &>>LOGFILENAME
 VALIDATE $? "Enable & START Catalogue"
 
-echo " working directory '$PWD'"
+SAMPLE
+echo  working directory "$PWD"
 cp mongo.repo /etc/yum.repos.d/mongo.repo
 dnf install mongodb-mongosh -y &>>LOGFILENAME
 VALIDATE $? "Install Mongodb client"
