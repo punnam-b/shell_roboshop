@@ -28,20 +28,20 @@ fi
 
 }
 
-dnf module disable redis -y
+dnf module disable redis -y &>>LOGFILENAME
 VALIDATE $? "Disabling redis Default version"
 
-dnf module enable redis:7 -y
+dnf module enable redis:7 -y &>>LOGFILENAME
 VALIDATE $? "Enable redis Default version"
 
-dnf install redis -y    
+dnf install redis -y    &>>LOGFILENAME
 VALIDATE $? "Install redis Default version"
 
 sed -i -e 's/127.0.0.1/0.0.0.0/g' -e '/protected-mode/ c protected-mode no' /etc/redis/redis.conf
 VALIDATE $? "updated the parameters"
 
-systemctl enable redis 
+systemctl enable redis &>>LOGFILENAME
 VALIDATE $? "enable redis Default version"
 
-systemctl start redis
+systemctl start redis &>>LOGFILENAME
 VALIDATE $? "start redis Default version"
