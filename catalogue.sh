@@ -36,10 +36,16 @@ dnf install nodejs -y &>>$LOGS_FILE
 VALIDATE $? "Install NODE JS"
 
 #creating system user
-useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOGS_FILE
-VALIDATE $? "create system user"
+id roboshop &>>$LOGS_FILE
 
-mkdir /app 
+if [ $? ne 0 ]; then
+        useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOGS_FILE
+        VALIDATE $? "create system user"
+ else
+        echo -e "Roboshop USER Already Existing.... $Y SKIPPING $N "
+fi
+
+mkdir  -p /app 
 VALIDATE $? "create directory app"
 
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip &>>$LOGS_FILE
