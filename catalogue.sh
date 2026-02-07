@@ -27,10 +27,10 @@ fi
 }
 
 dnf module disable nodejs -y &>>$LOGS_FILE
-VALIDATE $? " default  node js version disable"
+VALIDATE $? "Disabling node js Default version"
 
 dnf module enable nodejs:20 -y &>>$LOGS_FILE
-VALIDATE $?  "enable nodejs"
+VALIDATE $?  "Enable nodejs"
 
 dnf install nodejs -y &>>$LOGS_FILE
 VALIDATE $? "Install NODE JS"
@@ -39,7 +39,7 @@ VALIDATE $? "Install NODE JS"
 useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOGS_FILE
 VALIDATE $? "create system user"
 
-mkdir /app &>>$LOGS_FILE
+mkdir /app 
 VALIDATE $? "create directory app"
 
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip &>>$LOGS_FILE
