@@ -67,7 +67,7 @@ npm install &>>LOGFILENAME
 VALIDATE $? "npm install"
 
 
-cp $SCRIPT_DIR/catalogue.services /etc/systemd/system/catalogue.service &>>LOGFILENAME
+cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service
 VALIDATE $? "copying catalogue.service"
 
 systemctl daemon-reload &>>LOGFILENAME
@@ -75,8 +75,9 @@ systemctl enable catalogue  &>>LOGFILENAME
 systemctl start catalogue &>>LOGFILENAME
 VALIDATE $? "Enable & START Catalogue"
 
-SAMPLE=$PWD
-echo  "working directory '$SAMPLE'"
+
+echo  "working directory '$PWD'" 
+
 cp mongo.repo /etc/yum.repos.d/mongo.repo
 dnf install mongodb-mongosh -y &>>LOGFILENAME
 VALIDATE $? "Install Mongodb client"
