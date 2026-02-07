@@ -42,8 +42,8 @@ fi
 mkdir  -p /app 
 VALIDATE $? "create directory app"
 
-curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip &>>$LOGS_FILE
-VALIDATE $? "Download catalogue code"
+curl -o /tmp/payment.zip https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip &>>$LOGS_FILE
+VALIDATE $? "Download payment code"
 
 
 cd /app 
@@ -53,7 +53,7 @@ rm -rf /app/*
 VALIDATE $? "Removing Existing Code"
 
 unzip /tmp/payment.zip &>>$LOGS_FILE
-VALIDATE $? "Unzip Catalogue"
+VALIDATE $? "Unzip payment"
 
 
 cd /app 
