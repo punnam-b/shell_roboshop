@@ -60,6 +60,9 @@ cd /app
 pip3 install -r requirements.txt &>>$LOGS_FILE
 VALIDATE $? "PIP 2 insall"
 
+cp $SCRIPT_DIR/payment.service /etc/systemd/system/payment.service >>$LOGS_FILE
+VALIDATE $? "copying catalogue.service"
+
 
 systemctl daemon-reload &>>$LOGS_FILE
 VALIDATE $? "demon reload"
