@@ -5,11 +5,11 @@ Description=Payment Service
 User=root
 WorkingDirectory=/app
 // highlight-start
-Environment=CART_HOST=<CART-SERVER-IPADDRESS>
+Environment=CART_HOST=cart.dhruvanakshatra.in
 Environment=CART_PORT=8080
-Environment=USER_HOST=<USER-SERVER-IPADDRESS>
+Environment=USER_HOST=user.dhruvanakshatra.in
 Environment=USER_PORT=8080
-Environment=AMQP_HOST=<RABBITMQ-SERVER-IPADDRESS>
+Environment=AMQP_HOST=rabbitmq.dhruvanakshatra.in
 // highlight-end
 Environment=AMQP_USER=roboshop
 Environment=AMQP_PASS=roboshop123
