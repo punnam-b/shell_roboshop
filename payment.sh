@@ -7,7 +7,9 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-
+MONGODB_HOST="mongodb.dhruvanakshatra.in"
+SCRIPT_DIR=$PWD
+echo " working directory '$SCRIPT_DIR'"
 
 if [ $USERID -ne 0 ]; then
     echo  -e "$R .pls run with root user $N"  | tee -a $LOGS_FILE
