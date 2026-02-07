@@ -76,13 +76,22 @@ systemctl start catalogue &>>LOGFILENAME
 VALIDATE $? "Enable & START Catalogue"
 
 
-echo  "working directory '$PWD'" 
-
-cp mongo.repo /etc/yum.repos.d/mongo.repo
+cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo
 dnf install mongodb-mongosh -y &>>LOGFILENAME
 VALIDATE $? "Install Mongodb client"
 
 
+INDEX=$(mongosh --host $MONGODB_HOST --quiet  --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
+
+if [ $INDEX -le 0 ]; then
+    mongosh --host $MONGODB_HOST </app/db/master-data.js
+    VALIDATE $? "Loading products"
+else
+    echo -e "Products already loaded ... $Y SKIPPING $N"
+fi
+
+systemctl restart catalogue
+VALIDATE $? "Restarting catalogue"
 
 #mongosh --host $MONGODB_HOST --quiet --eval 'db.getMongo().getDBNames().indexOf("catalogue")' &>>LOGFILENAME
 
