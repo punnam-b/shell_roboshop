@@ -54,14 +54,14 @@ VALIDATE $? "Move to directory app"
 rm -rf /app/*
 VALIDATE $? "Removing Existing Code"
 
-unzip /tmp/shipping.zip &>>LOGFILENAME
+unzip /tmp/shipping.zip &>>LOGS_FILE
 VALIDATE $? "Unzip shipping"
 
 
 cd /app 
 VALIDATE $? "Move to directory app"
 
-mvn clean package &>>LOGFILENAME
+mvn clean package &>>LOGS_FILE
 mv target/shipping-1.0.jar shipping.jar 
 VALIDATE $? "Move shipping to target"
 
