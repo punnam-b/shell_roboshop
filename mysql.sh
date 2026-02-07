@@ -28,13 +28,13 @@ fi
 
 
 
-dnf install mysql-server -y
+dnf install mysql-server -y &>>$LOGS_FILE
 VALIDATE $? "Install MYSQL"
 
-systemctl enable mysqld
+systemctl enable mysqld &>>$LOGS_FILE
 VALIDATE $? "Enable sql user" 
 
-systemctl start mysqld  
+systemctl start mysqld  &>>$LOGS_FILE
 VALIDATE $? " START sql user"
 
 mysql_secure_installation --set-root-pass RoboShop@1
