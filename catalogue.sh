@@ -84,13 +84,13 @@ VALIDATE $? "Install Mongodb client"
 INDEX=$(mongosh --host $MONGODB_HOST --quiet  --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
 
 if [ $INDEX -le 0 ]; then
-    mongosh --host $MONGODB_HOST </app/db/master-data.js
+    mongosh --host $MONGODB_HOST </app/db/master-data.js &>>LOGFILENAME
     VALIDATE $? "Loading products"
 else
-    echo -e "Products already loaded ... $Y SKIPPING $N"
+    echo -e "Products already loaded ... $Y SKIPPING $N" 
 fi
 
-systemctl restart catalogue
+systemctl restart catalogue &>>LOGFILENAME
 VALIDATE $? "Restarting catalogue"
 
 #mongosh --host $MONGODB_HOST --quiet --eval 'db.getMongo().getDBNames().indexOf("catalogue")' &>>LOGFILENAME
